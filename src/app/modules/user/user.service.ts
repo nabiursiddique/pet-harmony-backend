@@ -27,6 +27,7 @@ const createUserIntoDB = async (payload: TUser) => {
     name: newUser.name,
     email: newUser.email,
     role: newUser.role,
+    profileImage: newUser.profileImage,
   };
 
   // creating access token

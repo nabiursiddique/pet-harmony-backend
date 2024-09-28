@@ -36,6 +36,7 @@ const signInUserIntoDB = async (payload: TUserSignIn) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    profileImage: user.profileImage,
   };
 
   // creating access token

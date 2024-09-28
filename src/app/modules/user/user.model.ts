@@ -20,9 +20,6 @@ const userSchema = new Schema<TUser, UserModel>(
       required: [true, 'Password is required'],
       select: 0,
     },
-    passwordChangedAt: {
-      type: Date,
-    },
     role: {
       type: String,
       enum: {
@@ -31,6 +28,15 @@ const userSchema = new Schema<TUser, UserModel>(
       },
       default: 'user',
     },
+    profileImage: {
+      type: String,
+      trim: true,
+      required: [true, 'Profile Image is required'],
+    },
+    passwordChangedAt: {
+      type: Date,
+    },
+
     isDeleted: {
       type: Boolean,
       default: false,

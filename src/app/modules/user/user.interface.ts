@@ -8,8 +8,9 @@ export interface TUser {
   name: string;
   email: string;
   password: string;
-  passwordChangedAt?: Date;
   role: TUserRole;
+  profileImage: string;
+  passwordChangedAt?: Date;
   isDeleted: boolean;
 }
 
