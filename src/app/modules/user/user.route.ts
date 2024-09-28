@@ -8,7 +8,7 @@ import { USER_ROLE } from './user.constant';
 const router = express.Router();
 
 router.post(
-  '/signup',
+  '/register',
   validateRequest(UserValidations.userValidationSchema),
   UserControllers.createUser,
 );

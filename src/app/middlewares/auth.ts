@@ -26,10 +26,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
 
-    const { role, userId, iat } = decoded;
+    const { role, _id, iat } = decoded;
 
     // checking if the user is available in db or not
-    const user = await User.isUserExistsById(userId);
+    const user = await User.isUserExistsById(_id);
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
     }

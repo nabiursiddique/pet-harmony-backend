@@ -32,7 +32,7 @@ const signInUserIntoDB = async (payload: TUserSignIn) => {
 
   // Creating jwt token and sending it to the client
   const jwtPayload = {
-    userId: user._id,
+    _id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,
@@ -62,7 +62,7 @@ const changePasswordIntoDB = async (
   payload: { oldPassword: string; newPassword: string },
 ) => {
   // checking if the user exists (using statics method of mongoose)
-  const user = await User.isUserExistsById(userData.userId);
+  const user = await User.isUserExistsById(userData._id);
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'User not found');
   }
@@ -91,7 +91,7 @@ const changePasswordIntoDB = async (
   // update the password into db
   await User.findOneAndUpdate(
     {
-      _id: userData.userId,
+      _id: userData._id,
       role: userData.role,
     },
     { password: newHashedPassword, passwordChangedAt: new Date() },
@@ -107,10 +107,10 @@ const refreshToken = async (token: string) => {
     config.jwt_refresh_secret as string,
   ) as JwtPayload;
 
-  const { userId, iat } = decoded;
+  const { _id, iat } = decoded;
 
   // checking if the user is available in db or not
-  const user = await User.isUserExistsById(userId);
+  const user = await User.isUserExistsById(_id);
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
   }
@@ -131,7 +131,7 @@ const refreshToken = async (token: string) => {
 
   // Creating jwt token and sending it to the client
   const jwtPayload = {
-    userId: user._id,
+    _id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,
