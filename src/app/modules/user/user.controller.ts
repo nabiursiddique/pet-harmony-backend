@@ -5,15 +5,8 @@ import { UserServices } from './user.service';
 import config from '../../config';
 
 const createUser = catchAsync(async (req, res) => {
-  // Parsing req.body directly if it's already a JSON object
-  const userPayload =
-    typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-
-  // Constructing the payload with the profile image if it exists
-  const result = await UserServices.createUserIntoDB({
-    ...userPayload,
-    profileImage: req.file?.path, // Adding the profile image to the payload
-  });
+  const user = req.body;
+  const result = await UserServices.createUserIntoDB(user);
 
   const { refreshToken, accessToken } = result;
   // setting refresh token into cookie

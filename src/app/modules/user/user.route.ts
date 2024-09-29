@@ -10,11 +10,6 @@ const router = express.Router();
 
 router.post(
   '/register',
-  multerUpload.single('image'),
-  (req: Request, res: Response, next: NextFunction) => {
-    req.body = JSON.parse(req.body.data);
-    next();
-  },
   validateRequest(UserValidations.userValidationSchema),
   UserControllers.createUser,
 );
