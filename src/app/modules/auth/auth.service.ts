@@ -107,10 +107,10 @@ const refreshToken = async (token: string) => {
     config.jwt_refresh_secret as string,
   ) as JwtPayload;
 
-  const { _id, iat } = decoded;
+  const { email, iat } = decoded;
 
   // checking if the user is available in db or not
-  const user = await User.isUserExistsById(_id);
+  const user = await User.isUserExistsByEmail(email);
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
   }
