@@ -3,7 +3,9 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
 import config from '../../config';
+import { Request, Response } from 'express';
 
+//* Create user into db
 const createUser = catchAsync(async (req, res) => {
   const user = req.body;
   const result = await UserServices.createUserIntoDB(user);
@@ -23,6 +25,37 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+//* get profile from db
+const getProfile = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.getProfileFromDB(req);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User profile retrieved successfully',
+    data: result,
+  });
+});
+
+//* Update profile into db
+const updateUserProfile = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.updateProfileIntoDB(req);
+  const { refreshToken, accessToken } = result;
+
+  // setting refresh token into cookie
+  res.cookie('refreshToken', refreshToken, {
+    secure: config.NODE_ENV === 'production',
+    httpOnly: true,
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Profile updated successfully',
+    data: { accessToken, refreshToken },
+  });
+});
+
+//* Get all user from DB
 const getAllUsers = catchAsync(async (req, res) => {
   const result = await UserServices.getAllUsersFromDB();
   sendResponse(res, {
@@ -36,4 +69,6 @@ const getAllUsers = catchAsync(async (req, res) => {
 export const UserControllers = {
   createUser,
   getAllUsers,
+  updateUserProfile,
+  getProfile,
 };
