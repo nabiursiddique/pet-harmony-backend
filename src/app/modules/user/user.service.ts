@@ -8,7 +8,7 @@ import { createToken } from '../auth/auth.utils';
 import { Request } from 'express';
 
 //* create user into db
-const createUserIntoDB = async (payload: TUser) => {
+const createUserIntoDB = async (payload: TUser, path: string) => {
   // checking if the user exists (using statics method of mongoose)
   const user = await User.isUserExistsByEmail(payload?.email);
   if (user) {
@@ -21,7 +21,8 @@ const createUserIntoDB = async (payload: TUser) => {
     Number(config.bcrypt_salt_rounds),
   );
   payload.password = hashPassword;
-  const newUser = await User.create(payload);
+  const userInfo = { ...payload, profileImage: path };
+  const newUser = await User.create(userInfo);
 
   // Creating jwt token and sending it to the client
   const jwtPayload = {

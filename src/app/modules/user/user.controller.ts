@@ -7,10 +7,12 @@ import { Request, Response } from 'express';
 
 //* Create user into db
 const createUser = catchAsync(async (req, res) => {
+  const path = req.file ? req.file.path : null;
   const user = req.body;
-  const result = await UserServices.createUserIntoDB(user);
+  const result = await UserServices.createUserIntoDB(user, path as string);
 
   const { refreshToken, accessToken } = result;
+
   // setting refresh token into cookie
   res.cookie('refreshToken', refreshToken, {
     secure: config.NODE_ENV === 'production',

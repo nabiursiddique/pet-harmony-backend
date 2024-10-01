@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { UserControllers } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { UserValidations } from './user.validation';
@@ -11,6 +11,11 @@ const router = express.Router();
 // register user
 router.post(
   '/register',
+  multerUpload.single('profileImage'),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
   validateRequest(UserValidations.userValidationSchema),
   UserControllers.createUser,
 );
