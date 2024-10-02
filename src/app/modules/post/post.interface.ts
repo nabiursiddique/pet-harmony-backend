@@ -17,6 +17,10 @@ export interface TPost {
     userId: mongoose.Types.ObjectId;
     voteType: 'up' | 'down';
   }[];
+  author: string;
+  authorId: mongoose.Types.ObjectId;
+  authorProfileImage: string;
+  authorEmail: string;
 }
 
 export interface Comment {

@@ -73,6 +73,18 @@ const postSchema = new Schema<TPost>(
       type: Boolean,
       default: true,
     },
+    author: {
+      type: String,
+    },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    authorProfileImage: {
+      type: String,
+    },
+    authorEmail: {
+      type: String,
+    },
   },
   {
     timestamps: true,
