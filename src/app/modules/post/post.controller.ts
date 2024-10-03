@@ -19,7 +19,7 @@ const getAllPosts = catchAsync(async (req, res) => {
   const result = await PostServices.getAllPostsFromDB();
   sendResponse(res, {
     success: true,
-    statusCode: httpStatus.FOUND,
+    statusCode: httpStatus.OK,
     message: 'All posts retrieved successfully',
     data: result,
   });
