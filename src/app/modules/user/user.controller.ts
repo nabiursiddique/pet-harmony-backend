@@ -62,7 +62,7 @@ const getAllUsers = catchAsync(async (req, res) => {
   const result = await UserServices.getAllUsersFromDB();
   sendResponse(res, {
     success: true,
-    statusCode: httpStatus.FOUND,
+    statusCode: httpStatus.OK,
     message: 'Users retrieved successfully',
     data: result,
   });

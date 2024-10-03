@@ -26,18 +26,17 @@ const getAllPosts = catchAsync(async (req, res) => {
 });
 
 //* Upvote post
-const upVotePost = catchAsync(async (req, res) => {
-  const result = await PostServices.upvotePostIntoDB(req);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Post up voted successfully',
-    data: result,
-  });
-});
+// const upVotePost = catchAsync(async (req, res) => {
+//   const result = await PostServices.upvotePostIntoDB(req);
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Post up voted successfully',
+//     data: result,
+//   });
+// });
 
 export const PostControllers = {
   createPost,
   getAllPosts,
-  upVotePost,
 };
