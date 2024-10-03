@@ -21,6 +21,13 @@ const createPostIntoDB = async (req: Request) => {
   return post;
 };
 
+//* Get all posts
+const getAllPostsFromDB = async () => {
+  const result = await Post.find();
+  return result;
+};
+
 export const PostServices = {
   createPostIntoDB,
+  getAllPostsFromDB,
 };

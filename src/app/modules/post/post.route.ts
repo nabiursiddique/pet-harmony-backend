@@ -18,4 +18,7 @@ router.post(
   PostControllers.createPost,
 );
 
+// get all posts
+router.get('/all-posts', PostControllers.getAllPosts);
+
 export const PostRoutes = router;
