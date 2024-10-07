@@ -22,10 +22,10 @@ router.post(
 router.get('/all-posts', PostControllers.getAllPosts);
 
 // upvote post
-// router.post(
-//   '/upvote-post',
-//   auth(USER_ROLE.admin, USER_ROLE.user),
-//   PostControllers.upVotePost,
-// );
+router.post(
+  '/upvote-post',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  PostControllers.upVotePost,
+);
 
 export const PostRoutes = router;
